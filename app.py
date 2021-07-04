@@ -23,7 +23,8 @@ annotation_files = [f for f in annotation_data_dir.rglob('*.csv')]
 dict_annotations_dfs = {f.parts[-1].split('.')[0]: pd.read_csv(f) for f in annotation_files}
 
 # load songid's genres
-df_genres = pd.read_csv('song_genres.csv')
+df_genres_dir = Path(os.getcwd()).absolute() / 'item_tags'
+df_genres = pd.read_csv(df_genres_dir/'song_genres.csv')
 df_genres.set_index('SONGID', inplace=True)
 
 # load embedding data
