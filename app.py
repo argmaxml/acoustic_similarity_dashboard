@@ -18,17 +18,17 @@ from io import StringIO
 
 sns.set()
 # load annotators data
-annotation_data_dir = Path(os.getcwd()).absolute() / 'ground_truth'
+annotation_data_dir = Path(__file__).absolute().parent / 'ground_truth'
 annotation_files = [f for f in annotation_data_dir.rglob('*.csv')]
 dict_annotations_dfs = {f.parts[-1].split('.')[0]: pd.read_csv(f) for f in annotation_files}
 
 # load songid's genres
-df_genres_dir = Path(os.getcwd()).absolute() / 'item_tags'
+df_genres_dir = Path(__file__).absolute().parent / 'item_tags'
 df_genres = pd.read_csv(df_genres_dir/'song_genres.csv')
 df_genres.set_index('SONGID', inplace=True)
 
 # load embedding data
-data_dir = annotation_data_dir.parent / 'embeddings'
+data_dir = Path(__file__).absolute().parent / 'embeddings'
 data_files = [f for f in data_dir.rglob('*.parquet')]
 dict_data_embeddings = {f.parts[-1].split('.')[0]: pd.read_parquet(f) for f in data_files}
 for k in dict_data_embeddings.keys():
